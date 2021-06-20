@@ -11,6 +11,7 @@ export class YoutubeComponent implements OnInit {
   player!: YT.Player;
   youtubeData:any;
   youtubeVideo:any;
+  setData:any;
 
 
     @ViewChild('channelName') channelName:ElementRef | undefined;
@@ -21,7 +22,8 @@ export class YoutubeComponent implements OnInit {
 
 
   this.youtubeService.onYoutube('Shiva Hindi Tech').subscribe((data)=>{
-    this.youtubeData= data.items;
+    this.setData=data;
+    this.youtubeData= data;
     // this.youtubeData.forEach((element: { id: any; }) => {
     //   this.youtubeVideo=element.id.videoId;
     // });
@@ -32,7 +34,8 @@ export class YoutubeComponent implements OnInit {
   getYoutubeData(){
     var channelName= this.channelName?.nativeElement.value;
     this.youtubeService.onYoutube(channelName).subscribe((data)=>{
-      this.youtubeData= data.items;
+      this.setData=data;
+      this.youtubeData= data;
       // this.youtubeData.forEach((element: { id: any; }) => {
       //   this.youtubeVideo=element.id.videoId;
       // });
