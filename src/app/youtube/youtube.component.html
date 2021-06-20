@@ -1,0 +1,31 @@
+
+<div class="row form-group clearfix">
+  <div class="col-sm-10">
+    <input type="text" class="form-control" #channelName placeholder="Search youtube title">
+  </div>
+  <div class="col-sm-2">
+    <button type="submit" class="btn btn-primary col-sm-12" (click)="getYoutubeData()"><i class="fa fa-search"></i> Search</button>
+  </div>
+</div>
+
+
+<div class="form-group clearfix">
+  <ul class="list-unstyled" *ngFor="let item of youtubeData;let i=index">
+    <li>
+      <h3>
+        {{item.snippet.channelTitle}}
+      </h3>
+    </li>
+    <li>
+      <h5>
+        {{item.snippet.description}}
+      </h5>
+    </li>
+
+    <li>
+            <youtube-player width="100%" height="400" [videoId]="item.id.videoId" [ready]="savePlayer($event)" (change)="onStateChange($event)"></youtube-player>
+    </li>
+    <li><hr/></li>
+
+</ul>
+</div>
