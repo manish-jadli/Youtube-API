@@ -9,47 +9,56 @@ import { YoutubeApiService } from '../service/youtube-api.service';
 })
 export class YoutubeComponent implements OnInit {
   player!: YT.Player;
-  youtubeData:any;
-  youtubeVideo:any;
-  setData:any;
+  youtubeData: any;
+  youtubeVideo: any;
+  setData: any;
 
 
-    @ViewChild('channelName') channelName:ElementRef | undefined;
+  @ViewChild('channelName') channelName: ElementRef | undefined;
 
-  constructor(private youtubeService:YoutubeApiService){}
-
-  ngOnInit(){
-
-
-  this.youtubeService.onYoutube('Shiva Hindi Tech').subscribe((data)=>{
-    this.setData=data;
-    this.youtubeData= data;
-    // this.youtubeData.forEach((element: { id: any; }) => {
-    //   this.youtubeVideo=element.id.videoId;
-    // });
-    })
+  constructor(private youtubeService: YoutubeApiService) {
 
   }
 
-  getYoutubeData(){
-    var channelName= this.channelName?.nativeElement.value;
-    this.youtubeService.onYoutube(channelName).subscribe((data)=>{
-      this.setData=data;
-      this.youtubeData= data;
+  ngOnInit() {
+
+
+    this.youtubeService.onYoutube('Shiva Hindi Tech').subscribe((data) => {
+      console.log(data);
+
+      this.setData = data;
+
+      this.youtubeData = this.setData.items;
       // this.youtubeData.forEach((element: { id: any; }) => {
       //   this.youtubeVideo=element.id.videoId;
       // });
     })
-   
+
+    this.getYoutubeData();
+
   }
 
-  savePlayer(player:any){
-  this.player=player;
-  console.log(player);
+  getYoutubeData() {
+    var channelName = this.channelName?.nativeElement.value;
+    this.youtubeService.onYoutube(channelName).subscribe((data) => {
+      console.log(data);
+
+      this.setData = data;
+      this.youtubeData = this.setData.items;
+      // this.youtubeData.forEach((element: { id: any; }) => {
+      //   this.youtubeVideo=element.id.videoId;
+      // });
+    })
+
   }
 
-  onStateChange(event:any){
-  console.log(event);
+  savePlayer(player: any) {
+    this.player = player;
+    console.log(player);
+  }
+
+  onStateChange(event: any) {
+    console.log(event);
   }
 
 }
